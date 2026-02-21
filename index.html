@@ -1,11 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>My Website</title>
+  <meta charset="UTF-8">
+  <title>Gurpreet Singh Nibber | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"/>
+  <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <h1>Welcome to My Website 🎉</h1>
-    <p>Hello! I am Gurpreet Singh Nibber.</p>
-    <p>This is my first website using GitHub Pages.</p>
+<body class="bg-gray-100 text-gray-800">
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-700 to-indigo-600 text-white h-screen flex flex-col justify-center items-center text-center" data-aos="fade-up">
+  <img src="profile-photo.jpg" alt="Gurpreet Singh Nibber" class="rounded-full w-40 h-40 mb-6 shadow-lg">
+  <h1 class="text-5xl font-bold mb-2">Gurpreet Singh Nibber</h1>
+  <p class="text-xl mb-4">Assistant Editor | Punjab Bureau – Hindustan Times</p>
+  <p class="max-w-xl">Reporting on politics, agriculture, energy, environment, and Punjabi affairs with insightful journalism and in-depth analysis.</p>
+  <a href="#articles" class="mt-6 inline-block bg-white text-blue-700 font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-gray-100 transition">View Articles</a>
+</section>
+
+<!-- About Section -->
+<section id="about" class="py-20 bg-white" data-aos="fade-right">
+  <div class="max-w-5xl mx-auto px-6">
+    <h2 class="text-4xl font-bold mb-6">About Me</h2>
+    <p class="text-lg leading-relaxed">Gurpreet Singh Nibber is an Assistant Editor with Hindustan Times, covering politics, agriculture, energy, environmental issues, Sikh religious affairs, and the Punjabi diaspora. He is passionate about investigative journalism, delivering news that impacts the community and policy making.</p>
+  </div>
+</section>
+
+<!-- Articles Section -->
+<section id="articles" class="py-20 bg-gray-50" data-aos="fade-left">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-bold mb-12 text-center">Featured Articles</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <!-- Sample Article Card -->
+      <div class="bg-white p-6 rounded-lg shadow-lg hover:shadow-2xl transition">
+        <img src="article1-thumbnail.jpg" class="rounded mb-4" alt="Article 1">
+        <h3 class="text-xl font-semibold mb-2">Eyes on 2027 Polls: SAD Plans Segment-Wise Rallies</h3>
+        <p class="mb-4 text-gray-600">Punjab political analysis and predictions for upcoming elections.</p>
+        <a href="#" class="text-blue-600 font-semibold hover:underline">Read More</a>
+      </div>
+      <!-- Repeat for more articles -->
+    </div>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="py-20 bg-white" data-aos="fade-up">
+  <div class="max-w-3xl mx-auto px-6 text-center">
+    <h2 class="text-4xl font-bold mb-6">Contact</h2>
+    <p class="mb-6">Get in touch for collaborations, interviews, or questions.</p>
+    <a href="mailto:example@email.com" class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">Email Me</a>
+  </div>
+</section>
+
+<script>
+  AOS.init({ duration: 1200 });
+</script>
 </body>
 </html>
