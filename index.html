@@ -1,38 +1,83 @@
-<!-- Link your CSS -->
-<link rel="stylesheet" href="style.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gurpreet Singh Nibber | Portfolio</title>
 
-<!-- Link your JS -->
-<script src="script.js"></script>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
-  <!-- Hero Section -->
-  <section id="hero">
-    <img src="assets/profile-photo.jpg" alt="Gurpreet Singh Nibber">
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="logo">GSN</div>
+  <ul class="nav-links">
+    <li><a href="#hero">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#articles">Articles</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ===== HERO SECTION ===== -->
+<section id="hero" class="hero">
+  <div class="hero-content">
     <h1>Gurpreet Singh Nibber</h1>
-    <p>Assistant Editor — Hindustan Times</p>
-    <a href="#articles">View Articles</a>
-  </section>
+    <p>Assistant Editor | Journalist | Political Analyst</p>
+    <button onclick="scrollToSection('articles')">View Articles</button>
+  </div>
+</section>
 
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Assistant Editor at Hindustan Times covering politics, agriculture, energy, and Punjab affairs.</p>
-  </section>
+<!-- ===== ABOUT ===== -->
+<section id="about" class="about">
+  <h2>About Me</h2>
+  <p>
+    Experienced journalist and Assistant Editor with expertise in politics,
+    agriculture, governance and Punjab affairs. Passionate about storytelling,
+    investigative journalism, and impactful reporting.
+  </p>
+</section>
 
-  <!-- Articles Section -->
-  <section id="articles">
-    <!-- Article Cards -->
-    <div>
-      <img src="assets/article1.jpg" alt="Article 1">
-      <h3>Top Political Analysis 2026</h3>
-      <p>Insights into Punjab politics...</p>
-      <a href="#">Read More</a>
+<!-- ===== ARTICLES / PORTFOLIO ===== -->
+<section id="articles" class="articles">
+  <h2>Featured Articles</h2>
+  <div class="cards">
+
+    <div class="card">
+      <h3>Political Analysis</h3>
+      <p>In-depth coverage and analysis of regional and national politics.</p>
     </div>
-    <!-- Repeat cards -->
-  </section>
 
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Email: example@email.com</p>
-  </section>
+    <div class="card">
+      <h3>Punjab Affairs</h3>
+      <p>Ground reports and insights on Punjab governance and public policy.</p>
+    </div>
+
+    <div class="card">
+      <h3>Agriculture & Economy</h3>
+      <p>Stories covering farmers, rural economy, and policy impact.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section id="contact" class="contact">
+  <h2>Contact</h2>
+  <p>Email: gurpreet@example.com</p>
+  <p>LinkedIn | Twitter | Professional Network</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Gurpreet Singh Nibber | Portfolio Website</p>
+</footer>
+
+<script src="script.js"></script>
 </body>
+</html>
