@@ -24,18 +24,18 @@ body {
 /* ===== NAVBAR HOVER ENHANCEMENT (SAFE ADD-ON) ===== */
 
 /* Slightly larger default size */
-.navbar .menu a {
+.navbar .nav-links a {
   font-size: 18px;
   transition: transform 0.25s ease, color 0.25s ease;
 }
 
 /* Smooth enlarge on hover */
-.navbar .menu a:hover {
+.navbar .nav-links a:hover {
   transform: scale(1.12);
 }
 
 /* Keep active page slightly emphasized */
-.navbar .menu a.active {
+.navbar .nav-links a.active {
   transform: scale(1.08);
 }
 
