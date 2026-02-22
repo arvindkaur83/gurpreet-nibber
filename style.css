@@ -21,6 +21,29 @@ body {
   top: 0;
 }
 
+/* ===== NAVBAR HOVER ENHANCEMENT (SAFE ADD-ON) ===== */
+
+/* Slightly larger default size */
+.navbar .menu a {
+  font-size: 18px;
+  transition: transform 0.25s ease, color 0.25s ease;
+}
+
+/* Smooth enlarge on hover */
+.navbar .menu a:hover {
+  transform: scale(1.12);
+}
+
+/* Keep active page slightly emphasized */
+.navbar .menu a.active {
+  transform: scale(1.08);
+}
+
+/* Optional: subtle glow (won't break existing colors) */
+.navbar .menu a:hover {
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
 .nav-links {
   list-style: none;
   display: flex;
