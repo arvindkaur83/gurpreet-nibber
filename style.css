@@ -1,3 +1,4 @@
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -10,54 +11,71 @@ body {
   background: #f4f6fb;
 }
 
-/* NAVBAR */
+/* ===== NAVBAR ===== */
 .navbar {
   display: flex;
   justify-content: space-between;
-  padding: 20px 40px;
-  background: #111827;
+  align-items: center;
+  padding: 20px 50px;
+  background: rgba(17, 24, 39, 0.95);
   color: white;
   position: sticky;
   top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
 
-/* ===== NAVBAR HOVER ENHANCEMENT (SAFE ADD-ON) ===== */
-
-/* Slightly larger default size */
-.navbar .nav-links a {
-  font-size: 18px;
-  transition: transform 0.25s ease, color 0.25s ease;
+.logo {
+  font-size: 22px;
+  font-weight: 700;
+  color: #38bdf8;
 }
-
-/* Smooth enlarge on hover */
-.navbar .nav-links a:hover {
-  transform: scale(1.12);
-}
-
-/* Keep active page slightly emphasized */
-.navbar .nav-links a.active {
-  transform: scale(1.08);
-}
-
-/* Optional: subtle glow (won't break existing colors) */
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 25px;
+  gap: 30px;
 }
 
 .nav-links a {
   color: white;
   text-decoration: none;
   font-weight: 500;
+  font-size: 18px;
+  position: relative;
+  transition: transform 0.3s ease, color 0.3s ease, text-shadow 0.3s ease;
 }
 
+/* Hover effects */
 .nav-links a:hover {
+  transform: scale(1.15);
   color: #60a5fa;
+  text-shadow: 0 0 10px rgba(56,189,248,0.7);
 }
 
-/* HERO */
+.nav-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0%;
+  height: 3px;
+  background: #38bdf8;
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-links a.active {
+  color: #38bdf8;
+  transform: scale(1.1);
+}
+
+/* HERO SECTION */
 .hero {
   height: 100vh;
   background: linear-gradient(135deg, #6366f1, #ec4899);
@@ -68,21 +86,29 @@ body {
   color: white;
 }
 
+.hero .hero-content {
+  background: rgba(0,0,0,0.5);
+  padding: 50px;
+  border-radius: 25px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+}
+
 .hero h1 {
   font-size: 3rem;
+  margin-bottom: 20px;
 }
 
 .hero p {
-  margin: 15px 0;
   font-size: 1.2rem;
+  margin-bottom: 25px;
 }
 
 .hero button {
-  padding: 12px 25px;
+  padding: 12px 30px;
   border: none;
-  background: white;
-  color: #111827;
-  font-weight: bold;
+  background: #38bdf8;
+  color: white;
+  font-weight: 600;
   border-radius: 30px;
   cursor: pointer;
   transition: 0.3s;
@@ -90,29 +116,35 @@ body {
 
 .hero button:hover {
   transform: scale(1.1);
+  background: #60a5fa;
 }
 
-/* ABOUT */
-.about {
-  padding: 80px 10%;
+/* ===== PAGE CONTENT BOX ===== */
+.page-content {
+  max-width: 900px;
+  margin: 80px auto;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* ABOUT SECTION */
+.about h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
   text-align: center;
 }
 
-.about h2 {
-  margin-bottom: 20px;
-  font-size: 2rem;
-}
-
-/* ARTICLES */
+/* ARTICLES SECTION */
 .articles {
-  padding: 80px 10%;
-  background: #ffffff;
+  background: #f4f6fb;
 }
 
 .cards {
   display: flex;
-  gap: 25px;
   flex-wrap: wrap;
+  gap: 25px;
   margin-top: 40px;
 }
 
@@ -121,21 +153,21 @@ body {
   min-width: 250px;
   background: #f1f5f9;
   padding: 25px;
-  border-radius: 15px;
+  border-radius: 20px;
   transition: 0.3s;
 }
 
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px) scale(1.02);
   background: #e0e7ff;
 }
 
-/* CONTACT */
+/* CONTACT SECTION */
 .contact {
-  padding: 80px 10%;
-  text-align: center;
   background: #111827;
   color: white;
+  padding: 80px 10%;
+  text-align: center;
 }
 
 /* FOOTER */
@@ -144,44 +176,4 @@ footer {
   padding: 20px;
   background: #020617;
   color: white;
-}
-
-/* ===== NAVBAR ENHANCEMENTS ===== */
-
-/* Make links slightly larger by default */
-.nav-links a {
-  font-size: 18px;
-  font-weight: 600;
-  transition: transform 0.25s ease, color 0.25s ease, text-shadow 0.25s ease;
-  position: relative; /* for underline animation */
-}
-
-/* Hover: enlarge + glow */
-.nav-links a:hover {
-  transform: scale(1.12);
-  color: #60a5fa; /* existing hover color */
-  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-}
-
-/* Active page highlight */
-.nav-links a.active {
-  transform: scale(1.08);
-  color: #38bdf8; /* slightly brighter to indicate active page */
-}
-
-/* Optional: animated underline on hover */
-.nav-links a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -5px;
-  width: 0%;
-  height: 2px;
-  background: #38bdf8;
-  transition: width 0.3s ease;
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-  width: 100%;
 }
