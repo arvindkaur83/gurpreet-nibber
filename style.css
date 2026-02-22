@@ -168,3 +168,11 @@ footer {
 .menu a.active::after {
   width: 100%;
 }
+
+.menu:hover a {
+  opacity: 0.6;
+}
+
+.menu a:hover {
+  opacity: 1;
+}
