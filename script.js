@@ -1,4 +1,4 @@
-// Function to load HTML content
+// Load HTML content into placeholders
 function includeHTML(elementId, file) {
   fetch(file)
     .then(response => response.text())
@@ -7,7 +7,7 @@ function includeHTML(elementId, file) {
     .catch(err => console.error(err));
 }
 
-// Highlight current menu link
+// Highlight the current menu link
 function highlightActive() {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const navLinks = document.querySelectorAll('.nav-links a');
@@ -18,6 +18,6 @@ function highlightActive() {
   });
 }
 
-// Load navbar and footer
+// Call includes
 includeHTML("navbar", "navbar.html");
 includeHTML("footer", "footer.html");
