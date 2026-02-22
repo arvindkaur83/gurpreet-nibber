@@ -40,9 +40,6 @@ body {
 }
 
 /* Optional: subtle glow (won't break existing colors) */
-.navbar .menu a:hover {
-  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
-}
 
 .nav-links {
   list-style: none;
