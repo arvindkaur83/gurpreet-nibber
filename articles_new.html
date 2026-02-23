@@ -19,22 +19,21 @@
   </section>
 
   <section class="page-content articles">
-    <h2>Articles</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Article Title 1</h3>
-        <p>Short summary of the first article goes here.</p>
-      </div>
-      <div class="card">
-        <h3>Article Title 2</h3>
-        <p>Short summary of the second article goes here.</p>
-      </div>
-      <div class="card">
-        <h3>Article Title 3</h3>
-        <p>Short summary of the third article goes here.</p>
-      </div>
-    </div>
-  </section>
+  <h2>Articles</h2>
+
+  <!-- 🔍 Search Box -->
+  <input 
+    type="text" 
+    id="keywordSearch" 
+    placeholder="Type keyword (e.g., Badal, Agriculture, Place)" 
+    style="margin-bottom:20px; padding:8px; width:100%; max-width:400px;"
+  >
+
+  <!-- 📰 Dynamic Articles -->
+  <div class="cards" id="articlesContainer">
+    <!-- Articles will load here dynamically -->
+  </div>
+</section>
 
   <div id="footer"></div>
 
