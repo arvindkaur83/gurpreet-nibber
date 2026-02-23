@@ -21,7 +21,7 @@ function highlightActive() {
 // Call includes
 includeHTML("navbar", "navbar.html");
 includeHTML("footer", "footer.html");
-
+// added for aggregator
 const searchInput = document.getElementById("keywordSearch");
 const articlesContainer = document.getElementById("articlesContainer");
 
