@@ -21,3 +21,39 @@ function highlightActive() {
 // Call includes
 includeHTML("navbar", "navbar.html");
 includeHTML("footer", "footer.html");
+
+const searchInput = document.getElementById("keywordSearch");
+const articlesContainer = document.getElementById("articlesContainer");
+
+async function fetchArticles(query="") {
+  const response = await fetch(`/api/news?q=${encodeURIComponent(query)}`);
+  const articles = await response.json();
+
+  articlesContainer.innerHTML = "";
+
+  if (articles.length === 0) {
+    articlesContainer.innerHTML = "<p>No articles found.</p>";
+    return;
+  }
+
+  articles.forEach(article => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <h3><a href="${article.link}" target="_blank">${article.title}</a></h3>
+      <p>${article.summary}</p>
+      <small>${article.source} | ${article.published}</small>
+    `;
+
+    articlesContainer.appendChild(card);
+  });
+}
+
+// Load all articles initially
+fetchArticles();
+
+// Search on typing
+searchInput.addEventListener("input", () => {
+  fetchArticles(searchInput.value);
+});
