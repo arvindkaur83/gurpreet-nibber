@@ -54,6 +54,13 @@ async function fetchArticles(query="") {
 fetchArticles();
 
 // Search on typing
+// Search on typing (optional, keep if you want live search)
 searchInput.addEventListener("input", () => {
+  fetchArticles(searchInput.value);
+});
+
+// 👇 Search on button click
+const searchButton = document.getElementById("searchButton");
+searchButton.addEventListener("click", () => {
   fetchArticles(searchInput.value);
 });
