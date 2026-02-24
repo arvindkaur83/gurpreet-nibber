@@ -196,27 +196,31 @@ footer {
 }
 
 /*again added new*/
-.social-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-  padding-left: 0;
-}
-
+/* Social icons inherit link color and have hover effects */
 .social-links li a {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #111827;
+  color: #111827; /* normal text/icon color */
   font-weight: 500;
   text-decoration: none;
+  transition: color 0.3s, background 0.3s;
+  padding: 5px 8px; /* optional: increase clickable area */
+  border-radius: 8px;
+}
+
+.social-links li a i {
+  font-size: 24px;
+  color: inherit; /* inherit link color */
   transition: color 0.3s;
 }
 
 .social-links li a:hover {
-  color: #38bdf8; /* hover color */
+  color: #38bdf8; /* hover text color */
+  background: #e0f2fe; /* subtle background on hover */
 }
 
-.social-links i {
-  font-size: 24px;
+.social-links li a:hover i {
+  color: #38bdf8; /* hover icon color */
+}
 }
