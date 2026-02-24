@@ -194,3 +194,29 @@ footer {
   transform: scale(1.1);
   background: #60a5fa;
 }
+
+/*again added new*/
+.social-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding-left: 0;
+}
+
+.social-links li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #111827;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.social-links li a:hover {
+  color: #38bdf8; /* hover color */
+}
+
+.social-links i {
+  font-size: 24px;
+}
