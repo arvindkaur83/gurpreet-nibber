@@ -201,7 +201,7 @@ footer {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #111827; /* normal text/icon color */
+  color: #ffffff; /* change from #111827 to white */
   font-weight: 500;
   text-decoration: none;
   transition: color 0.3s, background 0.3s;
@@ -217,10 +217,9 @@ footer {
 
 .social-links li a:hover {
   color: #38bdf8; /* hover text color */
-  background: #e0f2fe; /* subtle background on hover */
+  background: #1f2937; /* subtle darker background on hover */
 }
 
 .social-links li a:hover i {
   color: #38bdf8; /* hover icon color */
-}
 }
