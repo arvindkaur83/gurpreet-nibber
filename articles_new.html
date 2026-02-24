@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Articles - Gurpreet Singh Nibber</title>
-  <meta name="description" content="Articles and writings by Gurpreet Singh Nibber on journalism, insights, and analysis.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,33 +14,32 @@
     <div class="hero-content">
       <h1>Articles by Gurpreet Singh Nibber</h1>
       <p>Explore his latest writings and insights</p>
-      <button aria-label="View articles section"
-        onclick="document.getElementById('articles-section').scrollIntoView({behavior:'smooth'})">
-        View Articles
-      </button>
+      <button>View Articles</button>
     </div>
   </section>
 
-  <section id="articles-section" class="page-content articles">
-    <h2>Articles</h2>
-    <div class="cards">
-      <div class="card">
-        <h3><a href="#" target="_blank">Article Title 1</a></h3>
-        <p>Short summary of the first article goes here.</p>
-      </div>
-      <div class="card">
-        <h3><a href="#" target="_blank">Article Title 2</a></h3>
-        <p>Short summary of the second article goes here.</p>
-      </div>
-      <div class="card">
-        <h3><a href="#" target="_blank">Article Title 3</a></h3>
-        <p>Short summary of the third article goes here.</p>
-      </div>
-    </div>
-  </section>
+  <section class="page-content articles">
+  <h2>Articles</h2>
+
+  <!-- 🔍 Search Box -->
+  <div style="margin-bottom: 20px; display:flex; gap:10px; align-items:center;">
+  <input 
+    type="text" 
+    id="keywordSearch" 
+    placeholder="Type keyword..." 
+    style="padding:8px; width:70%; max-width:300px;"
+  >
+  <button id="searchButton" class="btn-hero">Search</button>
+</div>
+  <!-- 📰 Dynamic Articles -->
+  <div class="cards" id="articlesContainer">
+    <!-- Articles will load here dynamically -->
+  </div>
+</section>
 
   <div id="footer"></div>
 
   <script src="script.js"></script>
 </body>
 </html>
+
