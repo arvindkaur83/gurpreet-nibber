@@ -1,37 +1,31 @@
-// ======= HTML Include Function =======
+// Load HTML content into placeholders
 function includeHTML(elementId, file) {
   fetch(file)
     .then(response => response.text())
     .then(data => document.getElementById(elementId).innerHTML = data)
-    .then(() => {
-      highlightActive();
-      setupMobileMenu(); // ensure mobile toggle works after navbar is loaded
-    })
+    .then(() => highlightActive())
     .catch(err => console.error(err));
 }
 
-// ======= Highlight Active Menu Link =======
+// Highlight the current menu link
 function highlightActive() {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const navLinks = document.querySelectorAll('.nav-links a');
   navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href') === currentPage) {
+    if(link.getAttribute('href') === currentPage) {
       link.classList.add('active');
     }
   });
 }
 
-// ======= Include Navbar and Footer =======
+// Call includes
 includeHTML("navbar", "navbar.html");
 includeHTML("footer", "footer.html");
-
-// ======= Articles Section =======
+// added for aggregator
 const searchInput = document.getElementById("keywordSearch");
 const articlesContainer = document.getElementById("articlesContainer");
 
-async function fetchArticles(query = "") {
-  if (!articlesContainer) return; // skip if not on articles page
+async function fetchArticles(query="") {
   const response = await fetch(`/api/news?q=${encodeURIComponent(query)}`);
   const articles = await response.json();
 
@@ -51,6 +45,7 @@ async function fetchArticles(query = "") {
       <p>${article.summary}</p>
       <small>${article.source} | ${article.published}</small>
     `;
+
     articlesContainer.appendChild(card);
   });
 }
@@ -58,26 +53,14 @@ async function fetchArticles(query = "") {
 // Load all articles initially
 fetchArticles();
 
-// Live search while typing
-if (searchInput) {
-  searchInput.addEventListener("input", () => fetchArticles(searchInput.value));
-}
+// Search on typing
+// Search on typing (optional, keep if you want live search)
+searchInput.addEventListener("input", () => {
+  fetchArticles(searchInput.value);
+});
 
-// Search button click
+// 👇 Search on button click
 const searchButton = document.getElementById("searchButton");
-if (searchButton) {
-  searchButton.addEventListener("click", () => fetchArticles(searchInput.value));
-}
-
-// ======= Mobile Navbar Toggle =======
-function setupMobileMenu() {
-  const navToggle = document.querySelector(".nav-toggle");
-  const navLinks = document.querySelector(".nav-links");
-
-  if (!navToggle || !navLinks) return;
-
-  navToggle.addEventListener("click", () => {
-    navLinks.classList.toggle("nav-active");
-    navToggle.classList.toggle("toggle");
-  });
-}
+searchButton.addEventListener("click", () => {
+  fetchArticles(searchInput.value);
+});
