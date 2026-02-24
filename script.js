@@ -1,31 +1,37 @@
-// Load HTML content into placeholders
+// ======= HTML Include Function =======
 function includeHTML(elementId, file) {
   fetch(file)
     .then(response => response.text())
     .then(data => document.getElementById(elementId).innerHTML = data)
-    .then(() => highlightActive())
+    .then(() => {
+      highlightActive();
+      setupMobileMenu(); // ensure mobile toggle works after navbar is loaded
+    })
     .catch(err => console.error(err));
 }
 
-// Highlight the current menu link
+// ======= Highlight Active Menu Link =======
 function highlightActive() {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   const navLinks = document.querySelectorAll('.nav-links a');
   navLinks.forEach(link => {
-    if(link.getAttribute('href') === currentPage) {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === currentPage) {
       link.classList.add('active');
     }
   });
 }
 
-// Call includes
+// ======= Include Navbar and Footer =======
 includeHTML("navbar", "navbar.html");
 includeHTML("footer", "footer.html");
-// added for aggregator
+
+// ======= Articles Section =======
 const searchInput = document.getElementById("keywordSearch");
 const articlesContainer = document.getElementById("articlesContainer");
 
-async function fetchArticles(query="") {
+async function fetchArticles(query = "") {
+  if (!articlesContainer) return; // skip if not on articles page
   const response = await fetch(`/api/news?q=${encodeURIComponent(query)}`);
   const articles = await response.json();
 
@@ -45,7 +51,6 @@ async function fetchArticles(query="") {
       <p>${article.summary}</p>
       <small>${article.source} | ${article.published}</small>
     `;
-
     articlesContainer.appendChild(card);
   });
 }
@@ -53,14 +58,26 @@ async function fetchArticles(query="") {
 // Load all articles initially
 fetchArticles();
 
-// Search on typing
-// Search on typing (optional, keep if you want live search)
-searchInput.addEventListener("input", () => {
-  fetchArticles(searchInput.value);
-});
+// Live search while typing
+if (searchInput) {
+  searchInput.addEventListener("input", () => fetchArticles(searchInput.value));
+}
 
-// 👇 Search on button click
+// Search button click
 const searchButton = document.getElementById("searchButton");
-searchButton.addEventListener("click", () => {
-  fetchArticles(searchInput.value);
-});
+if (searchButton) {
+  searchButton.addEventListener("click", () => fetchArticles(searchInput.value));
+}
+
+// ======= Mobile Navbar Toggle =======
+function setupMobileMenu() {
+  const navToggle = document.querySelector(".nav-toggle");
+  const navLinks = document.querySelector(".nav-links");
+
+  if (!navToggle || !navLinks) return;
+
+  navToggle.addEventListener("click", () => {
+    navLinks.classList.toggle("nav-active");
+    navToggle.classList.toggle("toggle");
+  });
+}
