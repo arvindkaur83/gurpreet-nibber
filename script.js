@@ -1,9 +1,10 @@
-// ===== Wait for DOM to be fully loaded =====
+// ===== Wait for full DOM =====
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Include Navbar and Footer =====
   includeHTML("navbar", "navbar.html").then(() => {
     highlightActive();         // Highlight current page in navbar
+    attachHomeScrollBtn();     // Home page scroll button
     attachAboutScrollBtn();    // About page scroll button
     attachArticlesScrollBtn(); // Articles page scroll button
     attachContactScrollBtn();  // Contact page scroll button
@@ -30,6 +31,25 @@ document.addEventListener("DOMContentLoaded", () => {
       if (link.getAttribute('href') === currentPage) {
         link.classList.add('active');
       }
+    });
+  }
+
+  // ===== Scroll Button: Home Page =====
+  function attachHomeScrollBtn() {
+    const exploreBtn = document.querySelector(".hero button");
+    const firstSection = document.querySelector(".page-content");
+
+    if (!exploreBtn || !firstSection) {
+      setTimeout(attachHomeScrollBtn, 50);
+      return;
+    }
+
+    exploreBtn.addEventListener("click", () => {
+      const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+      window.scrollTo({
+        top: firstSection.offsetTop - navbarHeight,
+        behavior: "smooth"
+      });
     });
   }
 
@@ -74,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     sendMessageBtn.addEventListener("click", () => {
-      // If navbar is fixed, add offset to avoid hiding top content
       const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
       window.scrollTo({
         top: contactSection.offsetTop - navbarHeight,
@@ -117,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    // Initial load
+    // Initial fetch
     fetchArticles();
 
     // Live search
