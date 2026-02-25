@@ -1,10 +1,12 @@
 // Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ===== Include HTML for Navbar and Footer =====
+  // ===== Include Navbar and Footer =====
   includeHTML("navbar", "navbar.html").then(() => {
-    highlightActive();       // Highlight current page after navbar is loaded
-    attachScrollButtons();   // Attach scroll events after navbar/footer are ready
+    highlightActive();       // Highlight current page
+    attachAboutScrollBtn(); // About page scroll
+    attachArticlesScrollBtn(); // Articles page scroll
+    attachContactScrollBtn();  // Contact page scroll
   });
 
   includeHTML("footer", "footer.html");
@@ -31,23 +33,38 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== Attach Scroll Buttons for About & Articles pages =====
-  function attachScrollButtons() {
-    // About page button
+  // ===== Scroll Button for About Page =====
+  function attachAboutScrollBtn() {
     const readMoreBtn = document.getElementById("readMoreBtn");
     const aboutSection = document.getElementById("aboutSection");
+
     if(readMoreBtn && aboutSection) {
       readMoreBtn.addEventListener("click", () => {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       });
     }
+  }
 
-    // Articles page button
+  // ===== Scroll Button for Articles Page =====
+  function attachArticlesScrollBtn() {
     const viewArticlesBtn = document.getElementById("viewArticlesBtn");
     const articlesSection = document.getElementById("articlesSection");
+
     if(viewArticlesBtn && articlesSection) {
       viewArticlesBtn.addEventListener("click", () => {
         articlesSection.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+  }
+
+  // ===== Scroll Button for Contact Page =====
+  function attachContactScrollBtn() {
+    const sendMessageBtn = document.getElementById("sendMessageBtn");
+    const contactSection = document.getElementById("contactSection");
+
+    if(sendMessageBtn && contactSection) {
+      sendMessageBtn.addEventListener("click", () => {
+        contactSection.scrollIntoView({ behavior: "smooth" });
       });
     }
   }
