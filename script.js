@@ -21,6 +21,22 @@ function highlightActive() {
 // Call includes
 includeHTML("navbar", "navbar.html");
 includeHTML("footer", "footer.html");
+
+// Scroll button event - added on 24th Feb - start
+function addScrollListener() {
+  const readMoreBtn = document.getElementById("readMoreBtn");
+  const aboutSection = document.getElementById("aboutSection");
+
+  if(readMoreBtn && aboutSection) {
+    readMoreBtn.addEventListener("click", function() {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    });
+  }
+}
+// Scroll button event - added on 24th Feb - end
+// Call it after small delay to ensure DOM elements exist
+setTimeout(addScrollListener, 100); // 100ms delay
+
 // added for aggregator
 const searchInput = document.getElementById("keywordSearch");
 const articlesContainer = document.getElementById("articlesContainer");
@@ -65,7 +81,4 @@ searchButton.addEventListener("click", () => {
   fetchArticles(searchInput.value);
 });
 
-// Scroll down to About section on button  - 24th Feb 2026
-document.getElementById("readMoreBtn").addEventListener("click", function() {
-  document.getElementById("aboutSection").scrollIntoView({ behavior: "smooth" });
-});
+
