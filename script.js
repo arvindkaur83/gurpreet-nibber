@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Include HTML for Navbar and Footer =====
   includeHTML("navbar", "navbar.html").then(() => {
-    highlightActive(); // Highlight current page after navbar is loaded
-    attachScrollButton(); // Attach scroll event after navbar is ready
+    highlightActive();       // Highlight current page after navbar is loaded
+    attachScrollButtons();   // Attach scroll events after navbar/footer are ready
   });
 
   includeHTML("footer", "footer.html");
@@ -31,14 +31,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ===== Attach Scroll Button Event =====
-  function attachScrollButton() {
+  // ===== Attach Scroll Buttons for About & Articles pages =====
+  function attachScrollButtons() {
+    // About page button
     const readMoreBtn = document.getElementById("readMoreBtn");
     const aboutSection = document.getElementById("aboutSection");
-
     if(readMoreBtn && aboutSection) {
       readMoreBtn.addEventListener("click", () => {
         aboutSection.scrollIntoView({ behavior: "smooth" });
+      });
+    }
+
+    // Articles page button
+    const viewArticlesBtn = document.getElementById("viewArticlesBtn");
+    const articlesSection = document.getElementById("articlesSection");
+    if(viewArticlesBtn && articlesSection) {
+      viewArticlesBtn.addEventListener("click", () => {
+        articlesSection.scrollIntoView({ behavior: "smooth" });
       });
     }
   }
