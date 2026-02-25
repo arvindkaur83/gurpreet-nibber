@@ -64,3 +64,8 @@ const searchButton = document.getElementById("searchButton");
 searchButton.addEventListener("click", () => {
   fetchArticles(searchInput.value);
 });
+
+// Scroll down to About section on button  - 24th Feb 2026
+document.getElementById("readMoreBtn").addEventListener("click", function() {
+  document.getElementById("aboutSection").scrollIntoView({ behavior: "smooth" });
+});
