@@ -1,13 +1,14 @@
-// ===== Wait for full DOM =====
+// ===== Wait for DOM to be fully loaded =====
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Include Navbar and Footer =====
   includeHTML("navbar", "navbar.html").then(() => {
-    highlightActive();       // Highlight current page
-    attachAboutScrollBtn();  // About page scroll button
+    highlightActive();         // Highlight current page in navbar
+    attachAboutScrollBtn();    // About page scroll button
     attachArticlesScrollBtn(); // Articles page scroll button
     attachContactScrollBtn();  // Contact page scroll button
   });
+
   includeHTML("footer", "footer.html");
 
   // ===== Function to include HTML placeholders =====
@@ -26,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
     const navLinks = document.querySelectorAll('.nav-links a');
     navLinks.forEach(link => {
-      if(link.getAttribute('href') === currentPage) {
+      if (link.getAttribute('href') === currentPage) {
         link.classList.add('active');
       }
     });
@@ -37,11 +38,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const readMoreBtn = document.getElementById("readMoreBtn");
     const aboutSection = document.getElementById("aboutSection");
 
-    if(readMoreBtn && aboutSection) {
-      readMoreBtn.addEventListener("click", () => {
-        aboutSection.scrollIntoView({ behavior: "smooth" });
-      });
+    if (!readMoreBtn || !aboutSection) {
+      setTimeout(attachAboutScrollBtn, 50);
+      return;
     }
+
+    readMoreBtn.addEventListener("click", () => {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    });
   }
 
   // ===== Scroll Button: Articles Page =====
@@ -49,11 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const viewArticlesBtn = document.getElementById("viewArticlesBtn");
     const articlesSection = document.getElementById("articlesSection") || document.getElementById("articlesContainer");
 
-    if(viewArticlesBtn && articlesSection) {
-      viewArticlesBtn.addEventListener("click", () => {
-        articlesSection.scrollIntoView({ behavior: "smooth" });
-      });
+    if (!viewArticlesBtn || !articlesSection) {
+      setTimeout(attachArticlesScrollBtn, 50);
+      return;
     }
+
+    viewArticlesBtn.addEventListener("click", () => {
+      articlesSection.scrollIntoView({ behavior: "smooth" });
+    });
   }
 
   // ===== Scroll Button: Contact Page =====
@@ -61,26 +68,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendMessageBtn = document.getElementById("sendMessageBtn");
     const contactSection = document.getElementById("contactSection");
 
-    if(sendMessageBtn && contactSection) {
-      sendMessageBtn.addEventListener("click", () => {
-        contactSection.scrollIntoView({ behavior: "smooth" });
-      });
+    if (!sendMessageBtn || !contactSection) {
+      setTimeout(attachContactScrollBtn, 50);
+      return;
     }
+
+    sendMessageBtn.addEventListener("click", () => {
+      // If navbar is fixed, add offset to avoid hiding top content
+      const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 0;
+      window.scrollTo({
+        top: contactSection.offsetTop - navbarHeight,
+        behavior: "smooth"
+      });
+    });
   }
 
-  // ===== News Articles Fetch =====
+  // ===== News Articles Fetch (if applicable) =====
   const searchInput = document.getElementById("keywordSearch");
   const articlesContainer = document.getElementById("articlesContainer");
 
-  if(searchInput && articlesContainer) {
-    async function fetchArticles(query="") {
+  if (searchInput && articlesContainer) {
+    async function fetchArticles(query = "") {
       try {
         const response = await fetch(`/api/news?q=${encodeURIComponent(query)}`);
         const articles = await response.json();
 
         articlesContainer.innerHTML = "";
 
-        if(articles.length === 0) {
+        if (articles.length === 0) {
           articlesContainer.innerHTML = "<p>No articles found.</p>";
           return;
         }
@@ -96,21 +111,21 @@ document.addEventListener("DOMContentLoaded", () => {
           articlesContainer.appendChild(card);
         });
 
-      } catch(err) {
+      } catch (err) {
         articlesContainer.innerHTML = "<p>Error loading articles.</p>";
         console.error(err);
       }
     }
 
-    // Initial fetch
+    // Initial load
     fetchArticles();
 
     // Live search
     searchInput.addEventListener("input", () => fetchArticles(searchInput.value));
 
-    // Search button
+    // Search button click
     const searchButton = document.getElementById("searchButton");
-    if(searchButton) {
+    if (searchButton) {
       searchButton.addEventListener("click", () => fetchArticles(searchInput.value));
     }
   }
