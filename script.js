@@ -1,28 +1,38 @@
-// Wait until the full DOM is loaded
+// Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", () => {
 
-  // ----------------------
-  // Include navbar and footer
-  // ----------------------
-  const navbarPromise = fetch("navbar.html")
-    .then(res => res.text())
-    .then(html => document.getElementById("navbar").innerHTML = html);
+  // ===== Include HTML for Navbar and Footer =====
+  includeHTML("navbar", "navbar.html").then(() => {
+    highlightActive(); // Highlight current page after navbar is loaded
+    attachScrollButton(); // Attach scroll event after navbar is ready
+  });
 
-  const footerPromise = fetch("footer.html")
-    .then(res => res.text())
-    .then(html => document.getElementById("footer").innerHTML = html);
+  includeHTML("footer", "footer.html");
 
-  // After navbar/footer loaded
-  Promise.all([navbarPromise, footerPromise]).then(() => {
-    // Highlight active link in navbar
+  // ===== Function to include HTML into placeholders =====
+  function includeHTML(elementId, file) {
+    return fetch(file)
+      .then(response => {
+        if (!response.ok) throw new Error(`Could not fetch ${file}`);
+        return response.text();
+      })
+      .then(data => document.getElementById(elementId).innerHTML = data)
+      .catch(err => console.error(err));
+  }
+
+  // ===== Highlight the current menu link =====
+  function highlightActive() {
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
-    document.querySelectorAll('.nav-links a').forEach(link => {
+    const navLinks = document.querySelectorAll('.nav-links a');
+    navLinks.forEach(link => {
       if(link.getAttribute('href') === currentPage) {
         link.classList.add('active');
       }
     });
+  }
 
-    // Attach scroll event to button AFTER DOM exists
+  // ===== Attach Scroll Button Event =====
+  function attachScrollButton() {
     const readMoreBtn = document.getElementById("readMoreBtn");
     const aboutSection = document.getElementById("aboutSection");
 
@@ -31,17 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
         aboutSection.scrollIntoView({ behavior: "smooth" });
       });
     }
-  });
+  }
 
-  // ----------------------
-  // Article aggregator (optional)
-  // ----------------------
-  const articlesContainer = document.getElementById("articlesContainer");
+  // ===== News Articles Fetch (if applicable) =====
   const searchInput = document.getElementById("keywordSearch");
-  const searchButton = document.getElementById("searchButton");
+  const articlesContainer = document.getElementById("articlesContainer");
 
-  if(articlesContainer) {
-    async function fetchArticles(query = "") {
+  if(searchInput && articlesContainer) {
+    async function fetchArticles(query="") {
       try {
         const response = await fetch(`/api/news?q=${encodeURIComponent(query)}`);
         const articles = await response.json();
@@ -63,23 +70,27 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
           articlesContainer.appendChild(card);
         });
-      } catch(err) {
+      } catch (err) {
+        articlesContainer.innerHTML = "<p>Error loading articles.</p>";
         console.error(err);
-        articlesContainer.innerHTML = "<p>Error fetching articles.</p>";
       }
     }
 
     // Initial load
     fetchArticles();
 
-    // Live search
-    if(searchInput) {
-      searchInput.addEventListener("input", () => fetchArticles(searchInput.value));
-    }
+    // Search on typing
+    searchInput.addEventListener("input", () => {
+      fetchArticles(searchInput.value);
+    });
 
-    // Button search
+    // Search on button click
+    const searchButton = document.getElementById("searchButton");
     if(searchButton) {
-      searchButton.addEventListener("click", () => fetchArticles(searchInput ? searchInput.value : ""));
+      searchButton.addEventListener("click", () => {
+        fetchArticles(searchInput.value);
+      });
     }
   }
+
 });
