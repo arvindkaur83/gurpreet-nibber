@@ -150,11 +150,58 @@ if (contactForm) {
   contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const contact = document.getElementById("contact").value;
-    const email = document.getElementById("email").value;
-    const message = document.getElementById("message").value;
+    const name = document.getElementById("name").value.trim();
+    const contact = document.getElementById("contact").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
+    // ===== Validation =====
+
+    // 1. Name: only alphabets and spaces
+    const nameRegex = /^[A-Za-z\s]+$/;
+    if (!nameRegex.test(name)) {
+      alert("Name should contain only alphabets and spaces.");
+      return;
+    }
+
+    // 2. Contact: allow + and digits only, max 15 digits
+    const contactRegex = /^\+?\d{1,15}$/;
+    if (!contactRegex.test(contact)) {
+      alert("Contact number should contain only digits and optional '+' with max 15 digits.");
+      return;
+    }
+
+    // 3. Basic email check (browser also validates, but extra safety)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    // 4. Message not empty
+    if (message.length < 5) {
+      alert("Message should be at least 5 characters long.");
+      return;
+    }
+
+    try {
+      await db.collection("messages").add({
+        name: name,
+        contact: contact,
+        email: email,
+        message: message,
+        timestamp: new Date()
+      });
+
+      alert("Message sent successfully!");
+      contactForm.reset();
+
+    } catch (error) {
+      console.error("Error saving message:", error);
+      alert("Error sending message. Please try again.");
+    }
+  });
+}
     try {
       await db.collection("messages").add({
         name: name,
