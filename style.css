@@ -223,3 +223,67 @@ footer {
 .social-links li a:hover i {
   color: #38bdf8; /* hover icon color */
 }
+
+/* ===== Contact Form Styling ===== */
+
+#messageSection {
+  padding: 60px 20px;
+}
+
+#messageSection h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+}
+
+.card {
+  width: 100%;
+  max-width: 700px;   /* centered clean width */
+  padding: 30px;
+  border-radius: 12px;
+}
+
+/* Form layout */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Bigger inputs */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+/* Large textarea */
+.contact-form textarea {
+  min-height: 180px;
+  resize: vertical;
+}
+
+/* Button styling */
+.contact-form button {
+  padding: 16px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #000;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #333;
+}
