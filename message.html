@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Message - Gurpreet Singh Nibber</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="navbar"></div>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Send a Message</h1>
+      <p>Fill the form below to contact Gurpreet Singh Nibber</p>
+    </div>
+  </section>
+
+  <section class="page-content contact">
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="text" id="contact" placeholder="Contact Number" required>
+      <input type="email" id="email" placeholder="Email Address" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <div id="footer"></div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <!-- Firebase Config -->
+  <script src="firebase.js"></script>
+
+  <!-- Main Script -->
+  <script src="script.js"></script>
+
+</body>
+</html>
