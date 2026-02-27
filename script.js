@@ -19,7 +19,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!res.ok) throw new Error(`Could not fetch ${file}`);
         return res.text();
       })
-      .then(data => document.getElementById(elementId).innerHTML = data)
+      .then(data => {
+        document.getElementById(elementId).innerHTML = data;
+      })
       .catch(err => console.error(err));
   }
 
@@ -27,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function highlightActive() {
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
     const navLinks = document.querySelectorAll('.nav-links a');
+
     navLinks.forEach(link => {
       if (link.getAttribute('href') === currentPage) {
         link.classList.add('active');
@@ -72,7 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
   // ===== Articles Page Scroll =====
   function attachArticlesScrollBtn() {
     const viewArticlesBtn = document.getElementById("viewArticlesBtn");
-    const articlesSection = document.getElementById("articlesSection") || document.getElementById("articlesContainer");
+    const articlesSection =
+      document.getElementById("articlesSection") ||
+      document.getElementById("articlesContainer");
 
     if (!viewArticlesBtn || !articlesSection) {
       setTimeout(attachArticlesScrollBtn, 50);
@@ -131,6 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
           `;
           articlesContainer.appendChild(card);
         });
+
       } catch (err) {
         articlesContainer.innerHTML = "<p>Error loading articles.</p>";
         console.error(err);
@@ -138,10 +144,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     fetchArticles();
-    searchInput.addEventListener("input", () => fetchArticles(searchInput.value));
+
+    searchInput.addEventListener("input", () => {
+      fetchArticles(searchInput.value);
+    });
 
     const searchButton = document.getElementById("searchButton");
-    if (searchButton) searchButton.addEventListener("click", () => fetchArticles(searchInput.value));
+    if (searchButton) {
+      searchButton.addEventListener("click", () => {
+        fetchArticles(searchInput.value);
+      });
+    }
   }
 
   // ===== Contact Form Submission (Message Page) =====
@@ -151,34 +164,10 @@ document.addEventListener("DOMContentLoaded", () => {
     contactForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const name = document.getElementById("name").value.trim();
-      const contact = document.getElementById("contact").value.trim();
-      const email = document.getElementById("email").value.trim();
-      const message = document.getElementById("message").value.trim();
-
-      // ===== Validation =====
-      const nameRegex = /^[A-Za-z\s]+$/;
-      if (!nameRegex.test(name)) {
-        alert("Name should contain only alphabets and spaces.");
-        return;
-      }
-
-      const contactRegex = /^\+?\d{1,15}$/;
-      if (!contactRegex.test(contact)) {
-        alert("Contact number should contain only digits and optional '+' with max 15 digits.");
-        return;
-      }
-
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert("Please enter a valid email address.");
-        return;
-      }
-
-      if (message.length < 5) {
-        alert("Message should be at least 5 characters long.");
-        return;
-      }
+      const name = document.getElementById("name").value;
+      const contact = document.getElementById("contact").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
 
       try {
         await db.collection("messages").add({
@@ -191,9 +180,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
         alert("Message sent successfully!");
         contactForm.reset();
-
-        // Redirect to Home page
-        window.location.href = "index.html";
 
       } catch (error) {
         console.error("Error saving message:", error);
