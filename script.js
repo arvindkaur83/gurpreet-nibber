@@ -214,6 +214,9 @@ if (contactForm) {
       alert("Message sent successfully!");
       contactForm.reset();
 
+      // Redirect to Home page
+      window.location.href = "index.html";
+
     } catch (error) {
       console.error("Error saving message:", error);
       alert("Error sending message. Please try again.");
