@@ -143,5 +143,36 @@ document.addEventListener("DOMContentLoaded", () => {
     const searchButton = document.getElementById("searchButton");
     if (searchButton) searchButton.addEventListener("click", () => fetchArticles(searchInput.value));
   }
+// ===== Contact Form Submission (Message Page) =====
+const contactForm = document.getElementById("contactForm");
 
+if (contactForm) {
+  contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const contact = document.getElementById("contact").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    try {
+      await db.collection("messages").add({
+        name: name,
+        contact: contact,
+        email: email,
+        message: message,
+        timestamp: new Date()
+      });
+
+      alert("Message sent successfully!");
+      contactForm.reset();
+
+    } catch (error) {
+      console.error("Error saving message:", error);
+      alert("Error sending message. Please try again.");
+    }
+  });
+}
+
+  
 });
