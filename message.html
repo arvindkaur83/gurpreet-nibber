@@ -10,21 +10,32 @@
 
   <div id="navbar"></div>
 
+  <!-- HERO SECTION -->
   <section class="hero">
     <div class="hero-content">
       <h1>Send a Message</h1>
-      <p>Fill the form below to contact Gurpreet Singh Nibber</p>
+      <p>Share your thoughts, queries, or collaboration ideas</p>
+      <button onclick="document.getElementById('messageSection').scrollIntoView({behavior:'smooth'})">
+        Write Message
+      </button>
     </div>
   </section>
 
-  <section class="page-content contact">
-    <form id="contactForm">
-      <input type="text" id="name" placeholder="Your Name" required>
-      <input type="text" id="contact" placeholder="Contact Number" required>
-      <input type="email" id="email" placeholder="Email Address" required>
-      <textarea id="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+  <!-- MESSAGE SECTION (Styled like Articles) -->
+  <section class="page-content articles" id="messageSection">
+    <h2>Contact Form</h2>
+
+    <div class="cards">
+      <div class="card">
+        <form id="contactForm" class="contact-form">
+          <input type="text" id="name" placeholder="Your Name" required>
+          <input type="text" id="contact" placeholder="Contact Number" required>
+          <input type="email" id="email" placeholder="Email Address" required>
+          <textarea id="message" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </div>
   </section>
 
   <div id="footer"></div>
@@ -38,6 +49,5 @@
 
   <!-- Main Script -->
   <script src="script.js"></script>
-
 </body>
 </html>
