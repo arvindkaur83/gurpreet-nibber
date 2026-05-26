@@ -1,4 +1,6 @@
 // ===== Wait for DOM =====
+//document.addEventListener: Wait until HTML is fully loaded
+//Then run all JavaScript safely
 document.addEventListener("DOMContentLoaded", () => {
 
   // ===== Include Navbar and Footer =====
@@ -168,7 +170,27 @@ document.addEventListener("DOMContentLoaded", () => {
       const contact = document.getElementById("contact").value;
       const email = document.getElementById("email").value;
       const message = document.getElementById("message").value;
+      
+      // ✅ (validation on "name" before saving to Firebase)
+        const nameRegex = /^[A-Za-z\s]+$/;
 
+      if (!nameRegex.test(name)) {
+          alert("Name should contain only letters and spaces.");
+          return;
+}
+      // ✅ (end of validation on "name" before saving to Firebase)
+
+      // ✅ (validation on "contact" before saving to Firebase)
+      // ===== Contact Validation =====
+      const contactRegex = /^\+?[0-9]{10,14}$/;
+
+      if (!contactRegex.test(contact)) {
+        alert("Contact number must contain only 10 to 14 digits and optional + sign.");
+        return;
+      }
+      //✅ (end of validation on "contact" before saving to Firebase)
+
+     
       try {
         await db.collection("messages").add({
           name: name,
@@ -187,5 +209,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+// ===== Message Character Counter =====
+const messageField = document.getElementById("message");
+const charCount = document.getElementById("charCount");
 
+if (messageField && charCount) {
+  messageField.addEventListener("input", () => {
+    charCount.textContent = `${messageField.value.length} / 500`;
+  });
+}
 });
